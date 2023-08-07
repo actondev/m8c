@@ -1,0 +1,5 @@
+#+PROPERTY: header-args:sh :session *m8c*
+
+#+begin_src sh
+nim c -r m8c.nim
+#+end_src

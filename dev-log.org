@@ -1,0 +1,12 @@
+#+PROPERTY: header-args:sh :session *m8c*
+
+* <2023-08-08 Tue> maintain it with nim
+  ala "maintain it with zig"
+
+  loopback
+  #+begin_src sh
+brew install --cask loopback
+
+nimble install c2nim
+c2nim main.c # not usable
+  #+end_src
