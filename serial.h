@@ -5,12 +5,8 @@
 #define _SERIAL_H_
 
 #ifdef USE_LIBUSB
-// Max packet length of the USB endpoint
-#define serial_read_size 512
 int init_serial_with_file_descriptor(int file_descriptor);
 #else
-// maximum amount of bytes to read from the serial in one read()
-#define serial_read_size 512
 #endif
 
 int serial_init(int verbose);

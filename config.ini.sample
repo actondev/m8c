@@ -17,7 +17,7 @@ wait_packets = 128
 
 [keyboard]
 ; these need to be the decimal value of the SDL scancodes.
-; a table exists here: https://github.com/libsdl-org/sdlwiki/blob/main/SDLScancodeLookup.mediawiki
+; a table exists here: https://github.com/libsdl-org/sdlwiki/blob/73a2501/SDL2/SDLScancodeLookup.mediawiki
 key_up=82
 key_left=80
 key_down=81

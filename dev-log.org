@@ -9,4 +9,35 @@ brew install --cask loopback
 
 nimble install c2nim
 c2nim main.c # not usable
+c2nim types.h --mangle:"uint8_t=uint8"
+# or
+c2nim types.h --stdints
+c2nim types.h --header --stdints
+
+# alternatively, in the header file itself:
+#ifdef C2NIM
+#mangle uint8_t uint8
+#endif
+  #+end_src
+
+
+  net.nim -> net.h? could not automate it
+  #+begin_src sh
+nimble install nimlangserver
+# trying to make net.h file
+nim c --noMain --noLinking net.nim
+nim c --header net.nim
+nim c --noMain --noLinking --nimcache:nimcache net.nim
+
+  #+end_src
+
+  #+begin_src sh :session *m8-ser2net*
+pkill ser2net
+ser2net -C "127.0.0.1,1234:raw:0:/dev/cu.usbmodem136182101:115200 8DATABITS NONE 1STOPBIT" -d
+ifconfig | grep 192
+ser2net -C "0.0.0.0,1234:raw:0:/dev/cu.usbmodem136182101:115200 8DATABITS NONE 1STOPBIT" -d
+  #+end_src
+
+  #+begin_src sh
+nimsuggest --debug --stdin ./net.nim
   #+end_src
