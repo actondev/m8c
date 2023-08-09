@@ -19,7 +19,7 @@ pub fn build(b: *std.Build) void {
         .name = "m8c",
         // In this case the main source file is merely a path, however, in more
         // complicated build scripts, this could be a generated file.
-        // .root_source_file = .{ .path = "src/main.zig" },
+        .root_source_file = .{ .path = "src/main.zig" },
         .target = target,
         .optimize = optimize,
     });
@@ -39,6 +39,7 @@ pub fn build(b: *std.Build) void {
         // # "usb.c",
         "usb_audio.c",
     }, &.{});
+    exe.addIncludePath(std.Build.LazyPath.relative("src"));
     exe.linkSystemLibrary("sdl2");
     exe.linkSystemLibrary("serialport");
 

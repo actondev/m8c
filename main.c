@@ -27,7 +27,7 @@ void intHandler(int dummy) { run = QUIT; }
 
 void close_serial_port() { disconnect(); }
 
-int main(int argc, char *argv[]) {
+int cmain(int argc, char *argv[]) {
   // Initialize the config to defaults read in the params from the
   // configfile if present
   config_params_s conf = init_config();
