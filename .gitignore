@@ -16,3 +16,5 @@ cmake-build-*
 CMakeCache.txt
 CMakeFiles/
 cmake_install.cmake
+zig-out/
+zig-cache/

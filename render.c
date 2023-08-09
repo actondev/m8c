@@ -198,7 +198,8 @@ void draw_waveform(struct draw_oscilloscope_waveform_command *command) {
                            command->color.b, 255);
 
     // Create a SDL_Point array of the waveform pixels for batch drawing
-    SDL_Point waveform_points[command->waveform_size];
+    // REMARK: zig build crashes when command->waveform_size == 0
+    SDL_Point waveform_points[command->waveform_size == 0 ? 1 : command->waveform_size];
 
     for (int i = 0; i < command->waveform_size; i++) {
       // Limit value because the oscilloscope commands seem to glitch
