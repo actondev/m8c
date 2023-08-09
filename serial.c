@@ -36,7 +36,7 @@ static int detect_m8_serial_device(struct sp_port *m8_port) {
 }
 
 // Checks for connected devices and whether the specified device still exists
-int check_serial_port() {
+int serial_check_connection() {
 
   int device_found = 0;
 
@@ -68,7 +68,7 @@ int check_serial_port() {
   return device_found;
 }
 
-int init_serial(int verbose) {
+int serial_init(int verbose) {
   if (m8_port != NULL) {
     // Port is already initialized
     return 1;
@@ -169,7 +169,7 @@ static int check(enum sp_return result) {
   return result;
 }
 
-int reset_display() {
+int serial_reset_display() {
   int result;
 
   SDL_Log("Reset display\n");
@@ -184,7 +184,7 @@ int reset_display() {
   return 1;
 }
 
-int enable_and_reset_display() {
+int serial_enable_and_reset_display() {
   int result;
 
   SDL_Log("Enabling and resetting M8 display\n");
@@ -198,11 +198,11 @@ int enable_and_reset_display() {
   }
 
   SDL_Delay(10);
-  result = reset_display();
+  result = serial_reset_display();
   return result;
 }
 
-int disconnect() {
+int serial_disconnect() {
   int result;
 
   SDL_Log("Disconnecting M8\n");
@@ -225,7 +225,7 @@ int serial_read(uint8_t *serial_buf, int count) {
   return sp_nonblocking_read(m8_port, serial_buf, count);
 }
 
-int send_msg_controller(uint8_t input) {
+int serial_send_msg_controller(uint8_t input) {
   char buf[2] = {'C', input};
   size_t nbytes = 2;
   int result;
@@ -238,7 +238,7 @@ int send_msg_controller(uint8_t input) {
   return 1;
 }
 
-int send_msg_keyjazz(uint8_t note, uint8_t velocity) {
+int serial_send_msg_keyjazz(uint8_t note, uint8_t velocity) {
   if (velocity > 0x7F)
     velocity = 0x7F;
   char buf[3] = {'K', note, velocity};
