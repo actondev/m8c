@@ -15,6 +15,13 @@ pub fn build(b: *std.Build) void {
     // set a preferred release mode, allowing the user to decide how to optimize.
     const optimize = b.standardOptimizeOption(.{ .preferred_optimize_mode = .Debug });
 
+    const extension = b.addObject(.{
+        .name = "extension",
+        .root_source_file = .{ .path = "src/net.zig" },
+        .target = target,
+        .optimize = optimize,
+    });
+
     const exe = b.addExecutable(.{
         .name = "m8c",
         // In this case the main source file is merely a path, however, in more
@@ -23,6 +30,7 @@ pub fn build(b: *std.Build) void {
         .target = target,
         .optimize = optimize,
     });
+    exe.addObject(extension);
     exe.addCSourceFiles(&.{
         "audio.c",
         "command.c",
@@ -41,6 +49,7 @@ pub fn build(b: *std.Build) void {
     }, &.{});
     exe.addIncludePath(std.Build.LazyPath.relative("src"));
     exe.linkSystemLibrary("sdl2");
+    exe.linkLibC();
     exe.linkSystemLibrary("serialport");
 
     // This declares intent for the executable to be installed into the

@@ -1,4 +1,12 @@
 const std = @import("std");
+// pub const io_mode = std.io.Mode.evented;
+
+pub const std_options = struct {
+    const std = @import("std");
+    // pub const log_level: std.log.Level = .info;
+    // pub const io_mode = .evented;
+};
+
 const c = @cImport({
     @cInclude("main.h");
 });

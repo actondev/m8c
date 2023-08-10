@@ -17,6 +17,7 @@
 #include "serial.h"
 #include "slip.h"
 #include "types.h"
+#include "net.h"
 
 #define BUFFER_SIZE 512
 
@@ -31,14 +32,25 @@ void intHandler(int dummy) { run = QUIT; }
 int cmain(int argc, char *argv[]) {
   M8 m8;
 
-  m8.init = serial_init;
-  m8.check_connection = serial_check_connection;
-  m8.disconnect = serial_disconnect;
-  m8.read = serial_read;
-  m8.reset_display = serial_reset_display;
-  m8.enable_and_reset_display = serial_enable_and_reset_display;
-  m8.send_msg_controller = serial_send_msg_controller;
-  m8.send_msg_keyjazz = serial_send_msg_keyjazz;
+  if(0) {
+    m8.init = serial_init;
+    m8.check_connection = serial_check_connection;
+    m8.disconnect = serial_disconnect;
+    m8.read = serial_read;
+    m8.reset_display = serial_reset_display;
+    m8.enable_and_reset_display = serial_enable_and_reset_display;
+    m8.send_msg_controller = serial_send_msg_controller;
+    m8.send_msg_keyjazz = serial_send_msg_keyjazz;
+  } else {
+    m8.init = net_init;
+    m8.check_connection = net_check_connection;
+    m8.disconnect = net_disconnect;
+    m8.read = net_read;
+    m8.reset_display = net_reset_display;
+    m8.enable_and_reset_display = net_enable_and_reset_display;
+    m8.send_msg_controller = net_send_msg_controller;
+    m8.send_msg_keyjazz = net_send_msg_keyjazz;
+  }
 
   // Initialize the config to defaults read in the params from the
   // configfile if present
