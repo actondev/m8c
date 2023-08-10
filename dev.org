@@ -1,0 +1,18 @@
+#+PROPERTY: header-args:sh :session *m8c*
+
+#+begin_src sh
+zig init-exe
+
+ldd ./zig-out/bin/m8c
+otool -L ./zig-out/bin/m8c
+
+zig targets > targets.json
+zig build -Dtarget=x86_64-linux
+#+end_src
+
+
+#+begin_src sh :session *m8-ser2net*
+pkill ser2net
+ser2net -C "127.0.0.1,1234:raw:0:/dev/cu.usbmodem136182101:115200 8DATABITS NONE 1STOPBIT" -d
+ifconfig | grep 192
+#+end_src
